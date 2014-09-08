@@ -28,3 +28,9 @@ Multiple SLDubItems can be placed on a single SLDubView. Changes to the
 SLDubItem configuration can be made at any time, even after the item is
 visible. These changes are rendered in one swoop by calling the [SLDubView
 render:] method. This allows the changes to be animated if desired.
+
+TODO
+====
+
+* Avoid drawing line on top of text rect
+* Swipe to animate between items

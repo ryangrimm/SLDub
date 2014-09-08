@@ -20,11 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-/*
- TODO:
- • Avoid drawing line on top of text rect
- • Swipe to animate between items
- */
 
 #import "SLDubItem.h"
 #import "SLDubView.h"
@@ -109,7 +104,6 @@ typedef enum {
     [self.helpView patchHoleForItem:self];
     self.helpView = nil;
 }
-
 
 - (void)setPortalPath:(UIBezierPath *)portalPath {
     _portalPath = portalPath;
