@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.requires_arc =  true
   s.summary      =  'A dynamic way of annotating UIViews'
   s.description  =  'A dynamic way of annotating UIViews. Can be used to make fairly magical help overlays, show annotations on photos and maybe some other stuff too.'
-  s.source_files =  'SLDub/SLDub.h'
+  s.source_files =  'SLDub/*'
   s.public_header_files = 'SLDub/*.h'
   s.homepage     =  'https://github.com/ryangrimm/SLDub'
   s.source       =  { :git => 'https://github.com/ryangrimm/SLDub.git', :tag => '0.1' }
