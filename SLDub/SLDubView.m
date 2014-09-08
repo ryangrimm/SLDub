@@ -98,8 +98,6 @@
     self.fillLayer.fillRule = kCAFillRuleEvenOdd;
     self.fillLayer.fillColor = [UIColor colorWithWhite:0 alpha:0.75].CGColor;
     [self.layer addSublayer:self.fillLayer];
-
-    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapAction:)]];
 }
 
 - (void)setFrame:(CGRect)frame {
@@ -109,33 +107,6 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     self.fillLayer.fillColor = backgroundColor.CGColor;
-}
-
-- (void)tapAction:(UITapGestureRecognizer *)tapGesture {
-    if(tapGesture.state != UIGestureRecognizerStateEnded) {
-        return;
-    }
-
-    CGPoint tapPoint = [tapGesture locationInView:self];
-    BOOL tappedInPortal = NO;
-    for(SLDubItem *item in self.tapBlocks) {
-        if([item.portalPath containsPoint:tapPoint]) {
-            SLDubViewItemEventBlock tapBlock = [self.tapBlocks objectForKey:item];
-            tapBlock();
-            tappedInPortal = YES;
-        }
-    }
-
-    if(tappedInPortal || self.dismissOnTap == NO) {
-        return;
-    }
-
-    [UIView animateWithDuration:0.25 animations:^{
-        self.alpha = 0;
-    }
-    completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
 }
 
 - (void)forItem:(SLDubItem *)item setTapBlock:(SLDubViewItemEventBlock)tapBlock {
@@ -197,6 +168,40 @@
     else {
         self.fillLayer.path = portalPath.CGPath;
     }
+}
+
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    if(touches.count != 1) {
+        [super touchesEnded:touches withEvent:event];
+        return;
+    }
+
+    UITouch *touch = touches.anyObject;
+    if(touch.phase != UITouchPhaseEnded) {
+        [super touchesEnded:touches withEvent:event];
+        return;
+    }
+
+    CGPoint tapPoint = [touch locationInView:self];
+    BOOL tappedInPortal = NO;
+    for(SLDubItem *item in self.tapBlocks) {
+        if([item.portalPath containsPoint:tapPoint]) {
+            SLDubViewItemEventBlock tapBlock = [self.tapBlocks objectForKey:item];
+            tapBlock();
+            tappedInPortal = YES;
+        }
+    }
+
+    if(tappedInPortal || self.dismissOnTap == NO) {
+        return;
+    }
+
+    [UIView animateWithDuration:0.25 animations:^{
+        self.alpha = 0;
+    }
+    completion:^(BOOL finished) {
+        [self removeFromSuperview];
+    }];
 }
 
 @end

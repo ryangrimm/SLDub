@@ -37,6 +37,8 @@
     item.connectionCornerRadius = 25;
 
     [help forItem:item setTapBlock:^{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:nil message:@"You touched a portal" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+        [alert show];
     }];
 
     [item addToHelpView:help];
@@ -54,7 +56,6 @@
         item.descriptionRect = CGRectMake(10, 250, 225, 50);
         [item render:YES];
     });
-
 }
 
 @end
