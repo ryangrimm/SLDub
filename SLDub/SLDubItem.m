@@ -30,12 +30,12 @@
 #import "SLDubView.h"
 
 #define DEGREES_TO_RADIANS(angle) ((angle) / 180.0 * M_PI)
-#define CQHELPVIEWSTUBLENGTH 10
+#define SLDUBVIEWSTUBLENGTH 10
 
 typedef enum {
-    CQHelpViewItemAxisX,
-    CQHelpViewItemAxisY
-} CQHelpViewItemAxis;
+    SLDubItemAxisX,
+    SLDubItemAxisY
+} SLDubItemAxis;
 
 @interface SLDubItem ()
 @property (nonatomic, strong) CATextLayer *descriptionLayer;
@@ -526,7 +526,7 @@ typedef enum {
                 return;
             }
 
-            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:CQHelpViewItemAxisX];
+            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:SLDubItemAxisX];
             nextDirection = endPointIsAboveStartPoint ? SLDubItemDirectionUp : SLDubItemDirectionDown;
         }
         else {
@@ -534,7 +534,7 @@ typedef enum {
                 return;
             }
 
-            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:CQHelpViewItemAxisY];
+            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:SLDubItemAxisY];
             nextDirection = endPointIsLeftOfStartPoint ? SLDubItemDirectionLeft : SLDubItemDirectionRight;
         }
     }
@@ -542,19 +542,19 @@ typedef enum {
     else if(startDirectionMovesOnY != goalDirectionMovesOnY) {
         // Handling the "S" cases
         if(self.connectionEndDirection == SLDubItemDirectionUp && endPointIsAboveStartPoint == NO) {
-            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:CQHelpViewItemAxisX];
+            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:SLDubItemAxisX];
             nextDirection = SLDubItemDirectionDown;
         }
         else if(self.connectionEndDirection == SLDubItemDirectionDown && endPointIsAboveStartPoint) {
-            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:CQHelpViewItemAxisX];
+            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:SLDubItemAxisX];
             nextDirection = SLDubItemDirectionUp;
         }
         else if(self.connectionEndDirection == SLDubItemDirectionLeft && endPointIsLeftOfStartPoint == NO) {
-            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:CQHelpViewItemAxisY];
+            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:SLDubItemAxisY];
             nextDirection = SLDubItemDirectionRight;
         }
         else if(self.connectionEndDirection == SLDubItemDirectionRight && endPointIsLeftOfStartPoint) {
-            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:CQHelpViewItemAxisY];
+            nextPoint = [self midpointBetween:startPoint and:self.connectionEndPoint onAxis:SLDubItemAxisY];
             nextDirection = SLDubItemDirectionLeft;
         }
         // Typical 90º cases
@@ -590,8 +590,8 @@ typedef enum {
     [self generatePointsFrom:nextPoint moving:nextDirection intoArray:points];
 }
 
-- (CGPoint)midpointBetween:(CGPoint)point1 and:(CGPoint)point2 onAxis:(CQHelpViewItemAxis)axis {
-    if(axis == CQHelpViewItemAxisX) {
+- (CGPoint)midpointBetween:(CGPoint)point1 and:(CGPoint)point2 onAxis:(SLDubItemAxis)axis {
+    if(axis == SLDubItemAxisX) {
         CGFloat midX;
         if(point1.x > point2.x) {
             midX = point2.x + (point1.x - point2.x) * 0.5;
@@ -617,16 +617,16 @@ typedef enum {
     CGPoint newPoint = point;
     switch (direction) {
         case SLDubItemDirectionUp:
-            newPoint.y -= CQHELPVIEWSTUBLENGTH;
+            newPoint.y -= SLDUBVIEWSTUBLENGTH;
             break;
         case SLDubItemDirectionDown:
-            newPoint.y += CQHELPVIEWSTUBLENGTH;
+            newPoint.y += SLDUBVIEWSTUBLENGTH;
             break;
         case SLDubItemDirectionLeft:
-            newPoint.x -= CQHELPVIEWSTUBLENGTH;
+            newPoint.x -= SLDUBVIEWSTUBLENGTH;
             break;
         case SLDubItemDirectionRight:
-            newPoint.x += CQHELPVIEWSTUBLENGTH;
+            newPoint.x += SLDUBVIEWSTUBLENGTH;
             break;
     }
 

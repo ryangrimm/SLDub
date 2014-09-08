@@ -37,7 +37,7 @@ typedef enum {
     SLDubItemDirectionLeft
 } SLDubItemDirection;
 
-#define CQHelpViewItemConnectionCornerRadiusAuto -1;
+#define SLDubItemConnectionCornerRadiusAuto -1;
 
 @interface SLDubItem : CAShapeLayer
 
