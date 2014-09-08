@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C214065C19BE37BA002A64A3 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C214065B19BE37BA002A64A3 /* sample.jpg */; };
 		C2551B8619BE1A2600A2D2E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2551B8519BE1A2600A2D2E4 /* Foundation.framework */; };
 		C2551B8819BE1A2600A2D2E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2551B8719BE1A2600A2D2E4 /* CoreGraphics.framework */; };
 		C2551B8A19BE1A2600A2D2E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2551B8919BE1A2600A2D2E4 /* UIKit.framework */; };
@@ -22,7 +23,6 @@
 		C2551BB419BE1A2600A2D2E4 /* SLDub_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2551BB319BE1A2600A2D2E4 /* SLDub_ExampleTests.m */; };
 		C2551BC819BE1D8900A2D2E4 /* SLDubView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2551BC419BE1D8900A2D2E4 /* SLDubView.m */; };
 		C2551BC919BE1D8900A2D2E4 /* SLDubItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C2551BC619BE1D8900A2D2E4 /* SLDubItem.m */; };
-		C2551BCB19BE209100A2D2E4 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C2551BCA19BE209100A2D2E4 /* sample.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C214065B19BE37BA002A64A3 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
 		C2551B8219BE1A2600A2D2E4 /* SLDub-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SLDub-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2551B8519BE1A2600A2D2E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2551B8719BE1A2600A2D2E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -59,7 +60,6 @@
 		C2551BC519BE1D8900A2D2E4 /* SLDubItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDubItem.h; sourceTree = "<group>"; };
 		C2551BC619BE1D8900A2D2E4 /* SLDubItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLDubItem.m; sourceTree = "<group>"; };
 		C2551BC719BE1D8900A2D2E4 /* SLDub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDub.h; sourceTree = "<group>"; };
-		C2551BCA19BE209100A2D2E4 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sample.jpg; path = ../../../../Desktop/sample.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +133,7 @@
 		C2551B8C19BE1A2600A2D2E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				C2551BCA19BE209100A2D2E4 /* sample.jpg */,
+				C214065B19BE37BA002A64A3 /* sample.jpg */,
 				C2551B8D19BE1A2600A2D2E4 /* SLDub-Example-Info.plist */,
 				C2551B8E19BE1A2600A2D2E4 /* InfoPlist.strings */,
 				C2551B9119BE1A2600A2D2E4 /* main.m */,
@@ -251,7 +251,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C2551BA119BE1A2600A2D2E4 /* Images.xcassets in Resources */,
-				C2551BCB19BE209100A2D2E4 /* sample.jpg in Resources */,
+				C214065C19BE37BA002A64A3 /* sample.jpg in Resources */,
 				C2551B9019BE1A2600A2D2E4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -83,9 +83,12 @@ typedef enum {
 
     self.descriptionLayer = [[CATextLayer alloc] init];
     self.descriptionLayer.wrapped = YES;
+    self.descriptionLayer.contentsScale = [[UIScreen mainScreen] scale];
     self.tintColor = [UIColor whiteColor];
     self.font = [UIFont boldSystemFontOfSize:14];
     self.textTruncation = SLDubItemTruncationEnd;
+
+    self.contentsScale = [[UIScreen mainScreen] scale];
 }
 
 
