@@ -63,6 +63,7 @@
 - (id)initWithIdentifier:(NSString *)identifier {
     self = [super init];
     if(self) {
+        self.identifier = identifier;
         [self commonInit];
     }
     
@@ -72,6 +73,7 @@
 - (id)initWithFrame:(CGRect)frame identifier:(NSString *)identifier {
     self = [super initWithFrame:frame];
     if(self) {
+        self.identifier = identifier;
         [self commonInit];
     }
 
