@@ -31,6 +31,18 @@
 
 @implementation SLDubView
 
++ (void)resetAllIdentifiers {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSArray *seen = [defaults objectForKey:@"com.swelllines.sldub.identifiers"];
+    for(NSString *identifier in seen) {
+        if([identifier isKindOfClass:[NSString class]]) {
+            [defaults setBool:NO forKey:identifier];
+        }
+    }
+    [defaults removeObjectForKey:@"com.swelllines.sldub.identifiers"];
+    [defaults synchronize];
+}
+
 + (void)resetIdentifier:(NSString *)identifier {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults setBool:NO forKey:identifier];
@@ -80,17 +92,6 @@
     return self;
 }
 
-- (void)didMoveToSuperview {
-    if(self.identifier.length) {
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setBool:YES forKey:self.identifier];
-        [defaults synchronize];
-    }
-
-    [super didMoveToSuperview];
-}
-
-
 - (void)commonInit {
     self.holes = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableStrongMemory];
     self.tapBlocks = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableCopyIn];
@@ -100,6 +101,20 @@
     self.fillLayer.fillRule = kCAFillRuleEvenOdd;
     self.fillLayer.fillColor = [UIColor colorWithWhite:0 alpha:0.75].CGColor;
     [self.layer addSublayer:self.fillLayer];
+
+    if(self.identifier.length) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSArray *seen = [defaults objectForKey:@"com.swelllines.sldub.identifiers"];
+        if(seen == nil) {
+            seen = @[];
+        }
+
+        if([seen containsObject:self.identifier] == NO) {
+            seen = [seen arrayByAddingObject:self.identifier];
+            [defaults setObject:seen forKey:@"com.swelllines.sldub.identifiers"];
+            [defaults synchronize];
+        }
+    }
 }
 
 - (void)setFrame:(CGRect)frame {
@@ -109,6 +124,14 @@
 
 - (void)setBackgroundColor:(UIColor *)backgroundColor {
     self.fillLayer.fillColor = backgroundColor.CGColor;
+}
+
+- (void)removeFromSuperview {
+    if(self.identifier.length) {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setBool:YES forKey:self.identifier];
+        [defaults synchronize];
+    }
 }
 
 - (void)forItem:(SLDubItem *)item setTapBlock:(SLDubViewItemEventBlock)tapBlock {

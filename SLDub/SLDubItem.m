@@ -412,8 +412,8 @@ typedef enum {
             radius = MIN(self.connectionCornerRadius, maxRadius);
         }
 
-        SLDubItemDirection directionIn = [points[i][@"directionIn"] integerValue];
-        SLDubItemDirection directionOut = [points[i][@"directionOut"] integerValue];
+        SLDubItemDirection directionIn = (SLDubItemDirection)[points[i][@"directionIn"] integerValue];
+        SLDubItemDirection directionOut = (SLDubItemDirection)[points[i][@"directionOut"] integerValue];
 
         CGPoint cornerPoint = thisPoint;
         CGPoint endPoint = thisPoint;

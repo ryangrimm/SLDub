@@ -34,3 +34,6 @@ TODO
 
 * Avoid drawing line on top of text rect
 * Swipe to animate between items
+• Tools to help manage locations of portals and descriptions. Specifically, for
+	photos it would be fantastic to be able to specify the locations in the photos
+	native pixels and then have them scale according to how it's presented.

@@ -27,6 +27,7 @@ typedef void (^SLDubViewItemEventBlock)();
 
 @interface SLDubView : UIView
 
++ (void)resetAllIdentifiers;
 + (void)resetIdentifier:(NSString *)identifier;
 + (BOOL)hasShownIdentifier:(NSString *)identifier;
 
