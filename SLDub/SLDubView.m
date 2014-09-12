@@ -96,6 +96,7 @@
     self.holes = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableStrongMemory];
     self.tapBlocks = [NSMapTable mapTableWithKeyOptions:NSMapTableWeakMemory valueOptions:NSMapTableCopyIn];
     self.dismissOnTap = YES;
+    self.animationDuration = 0.15;
     
     self.fillLayer = [CAShapeLayer layer];
     self.fillLayer.fillRule = kCAFillRuleEvenOdd;
@@ -183,7 +184,7 @@
 
     if(animated) {
         CABasicAnimation* fillLayerAnimation = [CABasicAnimation animationWithKeyPath:@"path"];
-        fillLayerAnimation.duration = 0.15;
+        fillLayerAnimation.duration = self.animationDuration;
         fillLayerAnimation.fromValue = (id)self.fillLayer.path;
         fillLayerAnimation.toValue = (id)portalPath.CGPath;
 

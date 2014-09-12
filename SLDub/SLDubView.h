@@ -38,6 +38,7 @@ typedef void (^SLDubViewItemEventBlock)();
 
 @property (nonatomic, strong) NSString *identifier;
 @property (nonatomic) BOOL dismissOnTap;
+@property (nonatomic) CGFloat animationDuration;
 
 @end
 
