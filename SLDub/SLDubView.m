@@ -147,6 +147,7 @@
     if(item == nil || holePath == nil) {
         return;
     }
+
     [self.holes setObject:holePath forKey:item];
     [self render:NO];
 }

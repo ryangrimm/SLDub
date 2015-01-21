@@ -111,7 +111,9 @@ typedef enum {
     [self calculatePointsAndDirections];
 }
 
-- (void)setDescription:(NSString *)description {
+- (void)setDescription:(id)description {
+    assert([description isKindOfClass:[NSString class]] || [description isKindOfClass:[NSAttributedString class]]);
+
     self.descriptionLayer.string = description;
 
     [self calculateTextRect];
@@ -214,10 +216,7 @@ typedef enum {
 
 - (void)calculateTextRect {
     CGRect descriptionTextRect = self.descriptionRect;
-    descriptionTextRect.size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(self.descriptionRect.size.width, CGFLOAT_MAX)
-                                      options:NSStringDrawingUsesLineFragmentOrigin
-                                   attributes:[self attributesForDescription]
-                                      context:nil].size;
+    descriptionTextRect.size = [self descriptionSizeForWidth:self.descriptionRect.size.width];
 
     if(self.sizeDescriptionToText) {
         self.descriptionLayer.frame = descriptionTextRect;
@@ -233,7 +232,7 @@ typedef enum {
 }
 
 - (void)calculatePointsAndDirections {
-    if(self.portalPath == nil || self.description.length == 0 || CGRectEqualToRect(self.descriptionTextRect, CGRectZero)) {
+    if(self.portalPath == nil || ((NSString *)self.description).length == 0 || CGRectEqualToRect(self.descriptionTextRect, CGRectZero)) {
         return;
     }
 
@@ -380,7 +379,7 @@ typedef enum {
 }
 
 - (UIBezierPath *)makePath {
-    if(self.portalPath == nil || self.description.length == 0) {
+    if(self.portalPath == nil || ((NSString *)self.description).length == 0) {
         return nil;
     }
 
@@ -636,21 +635,24 @@ typedef enum {
     return sqrtf(xDelta * xDelta + yDelta * yDelta);
 }
 
+- (CGSize)descriptionSizeForWidth:(CGFloat)width {
+    CGSize size = CGSizeZero;
+    if([self.description isKindOfClass:[NSString class]]) {
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        paragraphStyle.alignment = self.textAlignment;
 
-- (NSDictionary *)attributesForDescription {
-    // If string is an attributed string
-    if ([self.descriptionLayer.string isKindOfClass:[NSAttributedString class]]) {
-        // enumerateAttributesInRange:options:usingBlock
-        return nil;
+        NSDictionary *attributes = @{
+                 NSFontAttributeName: self.font,
+                 NSParagraphStyleAttributeName: paragraphStyle
+                 };
+
+       size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
+    }
+    else {
+        size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(300.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     }
 
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    paragraphStyle.alignment = self.textAlignment;
-
-    return @{
-        NSFontAttributeName: self.font,
-        NSParagraphStyleAttributeName: paragraphStyle
-    };
+    return size;
 }
 
 

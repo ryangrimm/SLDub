@@ -9,6 +9,8 @@
 #import "SLViewController.h"
 #import "SLDub.h"
 
+#import "UIImage+SLDub.h"
+
 @interface SLViewController ()
 
 @end
@@ -17,6 +19,9 @@
 
 - (void)viewDidLoad
 {
+//    UIImage *circle = [UIImage imageNamed:@"big-drawn-circle"];
+//    UIBezierPath *path = [circle pathFromInnerAlpha:0.5];
+
     [super viewDidLoad];
     UIImageView *sampleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sample.jpg"]];
     sampleView.autoresizesSubviews = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
@@ -26,14 +31,20 @@
 
     SLDubView *help = [[SLDubView alloc] initWithFrame:self.view.bounds];
     help.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5];
+    help.animationDuration = 0.5;
     [self.view addSubview:help];
 
     SLDubItem *item = [[SLDubItem alloc] init];
     item.portalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(150, 215, 115, 115)];
-    item.description = @"Rob";
+
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:@"Rob\nSleeping like a baby"];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont italicSystemFontOfSize:20] range:NSMakeRange(0, 4)];
+    [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(4, 20)];
+    [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 24)];
+    item.description = attributedString;
     item.sizeDescriptionToText = YES;
     item.textAlignment = NSTextAlignmentCenter;
-    item.descriptionRect = CGRectMake(10, 50, 100, 50);
+    item.descriptionRect = CGRectMake(10, 150, 100, 50);
     item.connectionCornerRadius = 25;
 
     [help forItem:item setTapBlock:^{
@@ -43,7 +54,7 @@
 
     [item addToHelpView:help];
 
-
+/*
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         item.description = @"Joe";
         item.portalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(150, 170, 60, 60)];
@@ -56,6 +67,7 @@
         item.descriptionRect = CGRectMake(10, 250, 225, 50);
         [item render:YES];
     });
+ */
 }
 
 @end

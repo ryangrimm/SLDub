@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C214065C19BE37BA002A64A3 /* sample.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C214065B19BE37BA002A64A3 /* sample.jpg */; };
+		C220E33B1A6F1C7C0078C098 /* UIImage+SLDub.m in Sources */ = {isa = PBXBuildFile; fileRef = C220E33A1A6F1C7C0078C098 /* UIImage+SLDub.m */; };
+		C220E33D1A6F221F0078C098 /* big-drawn-circle@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C220E33C1A6F221F0078C098 /* big-drawn-circle@2x.png */; };
 		C2551B8619BE1A2600A2D2E4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2551B8519BE1A2600A2D2E4 /* Foundation.framework */; };
 		C2551B8819BE1A2600A2D2E4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2551B8719BE1A2600A2D2E4 /* CoreGraphics.framework */; };
 		C2551B8A19BE1A2600A2D2E4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2551B8919BE1A2600A2D2E4 /* UIKit.framework */; };
@@ -37,6 +39,9 @@
 
 /* Begin PBXFileReference section */
 		C214065B19BE37BA002A64A3 /* sample.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sample.jpg; sourceTree = "<group>"; };
+		C220E3391A6F1C7C0078C098 /* UIImage+SLDub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+SLDub.h"; sourceTree = "<group>"; };
+		C220E33A1A6F1C7C0078C098 /* UIImage+SLDub.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+SLDub.m"; sourceTree = "<group>"; };
+		C220E33C1A6F221F0078C098 /* big-drawn-circle@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "big-drawn-circle@2x.png"; sourceTree = "<group>"; };
 		C2551B8219BE1A2600A2D2E4 /* SLDub-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SLDub-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C2551B8519BE1A2600A2D2E4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C2551B8719BE1A2600A2D2E4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -133,6 +138,7 @@
 		C2551B8C19BE1A2600A2D2E4 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				C220E33C1A6F221F0078C098 /* big-drawn-circle@2x.png */,
 				C214065B19BE37BA002A64A3 /* sample.jpg */,
 				C2551B8D19BE1A2600A2D2E4 /* SLDub-Example-Info.plist */,
 				C2551B8E19BE1A2600A2D2E4 /* InfoPlist.strings */,
@@ -168,6 +174,8 @@
 				C2551BC519BE1D8900A2D2E4 /* SLDubItem.h */,
 				C2551BC619BE1D8900A2D2E4 /* SLDubItem.m */,
 				C2551BC719BE1D8900A2D2E4 /* SLDub.h */,
+				C220E3391A6F1C7C0078C098 /* UIImage+SLDub.h */,
+				C220E33A1A6F1C7C0078C098 /* UIImage+SLDub.m */,
 			);
 			name = SLDub;
 			path = ../SLDub;
@@ -252,6 +260,7 @@
 			files = (
 				C2551BA119BE1A2600A2D2E4 /* Images.xcassets in Resources */,
 				C214065C19BE37BA002A64A3 /* sample.jpg in Resources */,
+				C220E33D1A6F221F0078C098 /* big-drawn-circle@2x.png in Resources */,
 				C2551B9019BE1A2600A2D2E4 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +284,7 @@
 				C2551B9F19BE1A2600A2D2E4 /* SLViewController.m in Sources */,
 				C2551B9619BE1A2600A2D2E4 /* SLAppDelegate.m in Sources */,
 				C2551BC919BE1D8900A2D2E4 /* SLDubItem.m in Sources */,
+				C220E33B1A6F1C7C0078C098 /* UIImage+SLDub.m in Sources */,
 				C2551BC819BE1D8900A2D2E4 /* SLDubView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
