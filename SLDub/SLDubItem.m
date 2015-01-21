@@ -649,7 +649,7 @@ typedef enum {
        size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
     }
     else {
-        size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(300.f, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+        size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     }
 
     return size;
