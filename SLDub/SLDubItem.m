@@ -217,6 +217,7 @@ typedef enum {
 - (void)calculateTextRect {
     CGRect descriptionTextRect = self.descriptionRect;
     descriptionTextRect.size = [self descriptionSizeForWidth:self.descriptionRect.size.width];
+    descriptionTextRect.origin.x += (self.descriptionRect.size.width - descriptionTextRect.size.width) / 2.0;
 
     if(self.sizeDescriptionToText) {
         self.descriptionLayer.frame = descriptionTextRect;
