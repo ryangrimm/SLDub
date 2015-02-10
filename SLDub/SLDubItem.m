@@ -33,16 +33,16 @@ typedef enum {
 } SLDubItemAxis;
 
 @interface SLDubItem ()
-@property (nonatomic, strong) CATextLayer *descriptionLayer;
+@property (nonatomic, strong) CATextLayer *messageLayer;
 @property (nonatomic) BOOL connectionStartDirectionSetManually;
 @property (nonatomic) BOOL connectionEndDirectionSetManually;
 @property (nonatomic, weak) SLDubView *helpView;
-@property (nonatomic) CGRect descriptionTextRect;
+@property (nonatomic) CGRect messageTextRect;
 @end
 
 @implementation SLDubItem
 
-@synthesize descriptionRect = _descriptionRect;
+@synthesize messageRect = _messageRect;
 
 - (id)init {
     self = [super init];
@@ -76,9 +76,9 @@ typedef enum {
     self.lineWidth = 2;
     self.contentsScale = [[UIScreen mainScreen] scale];
 
-    self.descriptionLayer = [[CATextLayer alloc] init];
-    self.descriptionLayer.wrapped = YES;
-    self.descriptionLayer.contentsScale = [[UIScreen mainScreen] scale];
+    self.messageLayer = [[CATextLayer alloc] init];
+    self.messageLayer.wrapped = YES;
+    self.messageLayer.contentsScale = [[UIScreen mainScreen] scale];
     self.tintColor = [UIColor whiteColor];
     self.font = [UIFont boldSystemFontOfSize:14];
     self.textTruncation = SLDubItemTruncationEnd;
@@ -111,33 +111,37 @@ typedef enum {
     [self calculatePointsAndDirections];
 }
 
-- (void)setDescription:(id)description {
-    assert([description isKindOfClass:[NSString class]] || [description isKindOfClass:[NSAttributedString class]]);
+- (void)setMessage:(id)message {
+    if([message isKindOfClass:[NSMutableAttributedString class]]) {
+        message = [[NSAttributedString alloc] initWithAttributedString:message];
+    }
 
-    self.descriptionLayer.string = description;
+    assert([message isKindOfClass:[NSString class]] || [message isKindOfClass:[NSAttributedString class]]);
 
-    [self calculateTextRect];
-    [self calculatePointsAndDirections];
-}
-
-- (NSString *)description {
-    return self.descriptionLayer.string;
-}
-
-- (void)setDescriptionRect:(CGRect)descriptionRect {
-    _descriptionRect = descriptionRect;
-    self.descriptionLayer.frame = descriptionRect;
+    self.messageLayer.string = message;
 
     [self calculateTextRect];
     [self calculatePointsAndDirections];
 }
 
-- (CGRect)descriptionRect {
-    return _descriptionRect;
+- (NSString *)message {
+    return self.messageLayer.string;
 }
 
-- (void)setSizeDescriptionToText:(BOOL)sizeDescriptionToText {
-    _sizeDescriptionToText = sizeDescriptionToText;
+- (void)setMessageRect:(CGRect)messageRect {
+    _messageRect = messageRect;
+    self.messageLayer.frame = messageRect;
+
+    [self calculateTextRect];
+    [self calculatePointsAndDirections];
+}
+
+- (CGRect)messageRect {
+    return _messageRect;
+}
+
+- (void)setSizeMessageToText:(BOOL)sizeMessageToText {
+    _sizeMessageToText = sizeMessageToText;
 
     [self calculateTextRect];
     [self calculatePointsAndDirections];
@@ -147,14 +151,14 @@ typedef enum {
     _tintColor = tintColor;
 
     self.strokeColor = tintColor.CGColor;
-    self.descriptionLayer.foregroundColor = tintColor.CGColor;
+    self.messageLayer.foregroundColor = tintColor.CGColor;
 }
 
 - (void)setFont:(UIFont *)font {
     _font = font;
 
-    self.descriptionLayer.font = CFBridgingRetain(font.fontName);
-    self.descriptionLayer.fontSize = font.pointSize;
+    self.messageLayer.font = CFBridgingRetain(font.fontName);
+    self.messageLayer.fontSize = font.pointSize;
 
     [self calculatePointsAndDirections];
 }
@@ -164,19 +168,19 @@ typedef enum {
 
     switch (textAlignment) {
         case NSTextAlignmentLeft:
-            self.descriptionLayer.alignmentMode = kCAAlignmentLeft;
+            self.messageLayer.alignmentMode = kCAAlignmentLeft;
             break;
         case NSTextAlignmentCenter:
-            self.descriptionLayer.alignmentMode = kCAAlignmentCenter;
+            self.messageLayer.alignmentMode = kCAAlignmentCenter;
             break;
         case NSTextAlignmentRight:
-            self.descriptionLayer.alignmentMode = kCAAlignmentRight;
+            self.messageLayer.alignmentMode = kCAAlignmentRight;
             break;
         case NSTextAlignmentJustified:
-            self.descriptionLayer.alignmentMode = kCAAlignmentJustified;
+            self.messageLayer.alignmentMode = kCAAlignmentJustified;
             break;
         case NSTextAlignmentNatural:
-            self.descriptionLayer.alignmentMode = kCAAlignmentNatural;
+            self.messageLayer.alignmentMode = kCAAlignmentNatural;
             break;
     }
 
@@ -188,16 +192,16 @@ typedef enum {
 
     switch (textTruncation) {
         case SLDubItemTruncationNone:
-            self.descriptionLayer.truncationMode = kCATruncationNone;
+            self.messageLayer.truncationMode = kCATruncationNone;
             break;
         case SLDubItemTruncationStart:
-            self.descriptionLayer.truncationMode = kCATruncationStart;
+            self.messageLayer.truncationMode = kCATruncationStart;
             break;
         case SLDubItemTruncationEnd:
-            self.descriptionLayer.truncationMode = kCATruncationEnd;
+            self.messageLayer.truncationMode = kCATruncationEnd;
             break;
         case SLDubItemTruncationMiddle:
-            self.descriptionLayer.truncationMode = kCATruncationMiddle;
+            self.messageLayer.truncationMode = kCATruncationMiddle;
             break;
     }
 }
@@ -215,51 +219,51 @@ typedef enum {
 }
 
 - (void)calculateTextRect {
-    CGRect descriptionTextRect = self.descriptionRect;
-    descriptionTextRect.size = [self descriptionSizeForWidth:self.descriptionRect.size.width];
-    descriptionTextRect.origin.x += (self.descriptionRect.size.width - descriptionTextRect.size.width) / 2.0;
+    CGRect messageTextRect = self.messageRect;
+    messageTextRect.size = [self messageSizeForWidth:self.messageRect.size.width];
+    messageTextRect.origin.x += (self.messageRect.size.width - messageTextRect.size.width) / 2.0;
 
-    if(self.sizeDescriptionToText) {
-        self.descriptionLayer.frame = descriptionTextRect;
-        self.descriptionTextRect = descriptionTextRect;
+    if(self.sizeMessageToText) {
+        self.messageLayer.frame = messageTextRect;
+        self.messageTextRect = messageTextRect;
     }
-    else if(descriptionTextRect.size.height > self.descriptionRect.size.height) {
-        descriptionTextRect.size.height = self.descriptionRect.size.height;
-        self.descriptionTextRect = descriptionTextRect;
+    else if(messageTextRect.size.height > self.messageRect.size.height) {
+        messageTextRect.size.height = self.messageRect.size.height;
+        self.messageTextRect = messageTextRect;
     }
     else {
-        self.descriptionTextRect = descriptionTextRect;
+        self.messageTextRect = messageTextRect;
     }
 }
 
 - (void)calculatePointsAndDirections {
-    if(self.portalPath == nil || ((NSString *)self.description).length == 0 || CGRectEqualToRect(self.descriptionTextRect, CGRectZero)) {
+    if(self.portalPath == nil || ((NSString *)self.message).length == 0 || CGRectEqualToRect(self.messageTextRect, CGRectZero)) {
         return;
     }
 
     CGRect portalBounds = self.portalPath.bounds;
-    CGRect descRect = self.descriptionTextRect;
+    CGRect descRect = self.messageTextRect;
     CGPoint endPoint;
     SLDubItemDirection lastMove;
 
-    CGFloat descriptionTextPointY = descRect.origin.y + (self.font.pointSize * 0.5) + 1;
-    CGFloat descriptionMidpointX = descRect.origin.x + (descRect.size.width * 0.5);
-    CGFloat descriptionMidpointY = descRect.origin.y + (descRect.size.height * 0.5);
+    CGFloat messageTextPointY = descRect.origin.y + (self.font.pointSize * 0.5) + 1;
+    CGFloat messageMidpointX = descRect.origin.x + (descRect.size.width * 0.5);
+    CGFloat messageMidpointY = descRect.origin.y + (descRect.size.height * 0.5);
 
     if(self.connectionEndDirectionSetManually) {
         lastMove = self.connectionEndDirection;
         switch (self.connectionEndDirection) {
             case SLDubItemDirectionUp:
-                endPoint = CGPointMake(descriptionMidpointX, descRect.origin.y + descRect.size.height + 2);
+                endPoint = CGPointMake(messageMidpointX, descRect.origin.y + descRect.size.height + 2);
                 break;
             case SLDubItemDirectionDown:
-                endPoint = CGPointMake(descriptionMidpointX, descRect.origin.y - 2);
+                endPoint = CGPointMake(messageMidpointX, descRect.origin.y - 2);
                 break;
             case SLDubItemDirectionLeft:
-                endPoint = CGPointMake(descRect.origin.x + descRect.size.width + 2, descriptionTextPointY);
+                endPoint = CGPointMake(descRect.origin.x + descRect.size.width + 2, messageTextPointY);
                 break;
             case SLDubItemDirectionRight:
-                endPoint = CGPointMake(descRect.origin.x - 2, descriptionTextPointY);
+                endPoint = CGPointMake(descRect.origin.x - 2, messageTextPointY);
                 break;
         }
     }
@@ -267,23 +271,23 @@ typedef enum {
         switch (self.textAlignment) {
             case NSTextAlignmentLeft:
             case NSTextAlignmentNatural:
-                endPoint = CGPointMake(descRect.origin.x - 2, descriptionTextPointY);
+                endPoint = CGPointMake(descRect.origin.x - 2, messageTextPointY);
                 lastMove = SLDubItemDirectionRight;
                 break;
             case NSTextAlignmentRight:
-                endPoint = CGPointMake(descRect.origin.x + descRect.size.width + 2, descriptionTextPointY);
+                endPoint = CGPointMake(descRect.origin.x + descRect.size.width + 2, messageTextPointY);
                 lastMove = SLDubItemDirectionLeft;
                 break;
             case NSTextAlignmentCenter:
             case NSTextAlignmentJustified:
-                // The description is above the portal
-                if(descriptionMidpointY <= portalBounds.origin.y) {
-                    endPoint = CGPointMake(descriptionMidpointX, descRect.origin.y + descRect.size.height + 2);
+                // The message is above the portal
+                if(messageMidpointY <= portalBounds.origin.y) {
+                    endPoint = CGPointMake(messageMidpointX, descRect.origin.y + descRect.size.height + 2);
                     lastMove = SLDubItemDirectionUp;
                 }
-                // The description is below the portal
+                // The message is below the portal
                 else {
-                    endPoint = CGPointMake(descriptionMidpointX, descRect.origin.y - 2);
+                    endPoint = CGPointMake(messageMidpointX, descRect.origin.y - 2);
                     lastMove = SLDubItemDirectionDown;
                 }
                 break;
@@ -357,8 +361,8 @@ typedef enum {
 - (void)render:(BOOL)animated {
     self.frame = self.superlayer.bounds;
 
-    if(self.description && self.descriptionLayer.superlayer == nil) {
-        [self addSublayer:self.descriptionLayer];
+    if(self.message && self.messageLayer.superlayer == nil) {
+        [self addSublayer:self.messageLayer];
     }
 
     UIBezierPath *linePath = [self makePath];
@@ -380,7 +384,7 @@ typedef enum {
 }
 
 - (UIBezierPath *)makePath {
-    if(self.portalPath == nil || ((NSString *)self.description).length == 0) {
+    if(self.portalPath == nil || ((NSString *)self.message).length == 0) {
         return nil;
     }
 
@@ -636,9 +640,9 @@ typedef enum {
     return sqrtf(xDelta * xDelta + yDelta * yDelta);
 }
 
-- (CGSize)descriptionSizeForWidth:(CGFloat)width {
+- (CGSize)messageSizeForWidth:(CGFloat)width {
     CGSize size = CGSizeZero;
-    if([self.description isKindOfClass:[NSString class]]) {
+    if([self.message isKindOfClass:[NSString class]]) {
         NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
         paragraphStyle.alignment = self.textAlignment;
 
@@ -647,10 +651,10 @@ typedef enum {
                  NSParagraphStyleAttributeName: paragraphStyle
                  };
 
-       size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
+       size = [self.messageLayer.string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:attributes context:nil].size;
     }
     else {
-        size = [self.descriptionLayer.string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
+        size = [self.messageLayer.string boundingRectWithSize:CGSizeMake(width, CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     }
 
     return size;

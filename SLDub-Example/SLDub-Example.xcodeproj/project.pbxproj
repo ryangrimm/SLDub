@@ -25,6 +25,7 @@
 		C2551BB419BE1A2600A2D2E4 /* SLDub_ExampleTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C2551BB319BE1A2600A2D2E4 /* SLDub_ExampleTests.m */; };
 		C2551BC819BE1D8900A2D2E4 /* SLDubView.m in Sources */ = {isa = PBXBuildFile; fileRef = C2551BC419BE1D8900A2D2E4 /* SLDubView.m */; };
 		C2551BC919BE1D8900A2D2E4 /* SLDubItem.m in Sources */ = {isa = PBXBuildFile; fileRef = C2551BC619BE1D8900A2D2E4 /* SLDubItem.m */; };
+		C2C1FF141A717858001E070E /* SLDubImagePunch.m in Sources */ = {isa = PBXBuildFile; fileRef = C2C1FF131A717858001E070E /* SLDubImagePunch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		C2551BC519BE1D8900A2D2E4 /* SLDubItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDubItem.h; sourceTree = "<group>"; };
 		C2551BC619BE1D8900A2D2E4 /* SLDubItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLDubItem.m; sourceTree = "<group>"; };
 		C2551BC719BE1D8900A2D2E4 /* SLDub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDub.h; sourceTree = "<group>"; };
+		C2C1FF121A717858001E070E /* SLDubImagePunch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SLDubImagePunch.h; sourceTree = "<group>"; };
+		C2C1FF131A717858001E070E /* SLDubImagePunch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SLDubImagePunch.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,7 @@
 		C2551BC219BE1D8900A2D2E4 /* SLDub */ = {
 			isa = PBXGroup;
 			children = (
+				C2C1FF111A7177E8001E070E /* Classes */,
 				C2551BC319BE1D8900A2D2E4 /* SLDubView.h */,
 				C2551BC419BE1D8900A2D2E4 /* SLDubView.m */,
 				C2551BC519BE1D8900A2D2E4 /* SLDubItem.h */,
@@ -179,6 +183,15 @@
 			);
 			name = SLDub;
 			path = ../SLDub;
+			sourceTree = "<group>";
+		};
+		C2C1FF111A7177E8001E070E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				C2C1FF121A717858001E070E /* SLDubImagePunch.h */,
+				C2C1FF131A717858001E070E /* SLDubImagePunch.m */,
+			);
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,6 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2C1FF141A717858001E070E /* SLDubImagePunch.m in Sources */,
 				C2551B9219BE1A2600A2D2E4 /* main.m in Sources */,
 				C2551B9F19BE1A2600A2D2E4 /* SLViewController.m in Sources */,
 				C2551B9619BE1A2600A2D2E4 /* SLAppDelegate.m in Sources */,

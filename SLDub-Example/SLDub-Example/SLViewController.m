@@ -10,6 +10,7 @@
 #import "SLDub.h"
 
 #import "UIImage+SLDub.h"
+#import "SLDubImagePunch.h"
 
 @interface SLViewController ()
 
@@ -21,6 +22,14 @@
 {
 //    UIImage *circle = [UIImage imageNamed:@"big-drawn-circle"];
 //    UIBezierPath *path = [circle pathFromInnerAlpha:0.5];
+
+    /*
+    UIImage *circle = [UIImage imageNamed:@"big-drawn-circle"];
+    SLDubImagePunch *punch = [[SLDubImagePunch alloc] initWithImage:circle threshold:0.5];
+    [punch process];
+    UIImage *mask = [UIImage imageWithCGImage:[punch createMask] scale:circle.scale orientation:UIImageOrientationUp];
+    UIImageView *maskView = [[UIImageView alloc] initWithImage:mask];
+*/
 
     [super viewDidLoad];
     UIImageView *sampleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sample.jpg"]];
@@ -41,10 +50,10 @@
     [attributedString addAttribute:NSFontAttributeName value:[UIFont italicSystemFontOfSize:20] range:NSMakeRange(0, 4)];
     [attributedString addAttribute:NSFontAttributeName value:[UIFont systemFontOfSize:12] range:NSMakeRange(4, 20)];
     [attributedString addAttribute:NSForegroundColorAttributeName value:[UIColor whiteColor] range:NSMakeRange(0, 24)];
-    item.description = attributedString;
-    item.sizeDescriptionToText = YES;
+    item.message = attributedString;
+    item.sizeMessageToText = YES;
     item.textAlignment = NSTextAlignmentCenter;
-    item.descriptionRect = CGRectMake(10, 150, 100, 50);
+    item.messageRect = CGRectMake(10, 150, 100, 50);
     item.connectionCornerRadius = 25;
 
     [help forItem:item setTapBlock:^{
@@ -54,17 +63,20 @@
 
     [item addToHelpView:help];
 
+//    [self.view addSubview:maskView];
+
+
 /*
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        item.description = @"Joe";
+        item.message = @"Joe";
         item.portalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(150, 170, 60, 60)];
         [item render:YES];
     });
 
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(6 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        item.description = @"A big ass bag so we can drag all our shit up thousands of feet of rock. Hauling gear can suck.";
+        item.message = @"A big ass bag so we can drag all our shit up thousands of feet of rock. Hauling gear can suck.";
         item.portalPath = [UIBezierPath bezierPathWithOvalInRect:CGRectMake(150, 115, 60, 60)];
-        item.descriptionRect = CGRectMake(10, 250, 225, 50);
+        item.messageRect = CGRectMake(10, 250, 225, 50);
         [item render:YES];
     });
  */

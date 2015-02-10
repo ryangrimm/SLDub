@@ -20,7 +20,7 @@ typedef enum {
 - (UIBezierPath *)pathFromInnerAlpha:(CGFloat)threshold {
     // XXX - check to make sure it has an alpha channel
 
-    // First get the image into your data buffer
+    // First get the image into a data buffer
     CGImageRef imageRef = self.CGImage;
     NSUInteger width = CGImageGetWidth(imageRef);
     NSUInteger height = CGImageGetHeight(imageRef);
@@ -37,7 +37,7 @@ typedef enum {
 
     // Now the rawData contains the image data in the RGBA8888 pixel format.
     NSUInteger byteIndex = 0;
-    for (int i = 0 ; i < width * height ; ++i) {
+    for (int i = 0; i < width * height; ++i) {
         CGFloat alpha = (rawData[byteIndex + 3] * 1.0) / 255.0;
         alphaPixels[i] = alpha > threshold;
         byteIndex += bytesPerPixel;

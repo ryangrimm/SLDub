@@ -46,9 +46,9 @@ typedef enum {
 - (void)render:(BOOL)animated;
 
 @property (nonatomic, strong) UIBezierPath *portalPath;
-@property (nonatomic, strong) id description;
-@property (nonatomic) CGRect descriptionRect;
-@property (nonatomic) BOOL sizeDescriptionToText;
+@property (nonatomic, strong) id message;
+@property (nonatomic) CGRect messageRect;
+@property (nonatomic) BOOL sizeMessageToText;
 @property (nonatomic, strong) UIColor *tintColor;
 @property (nonatomic, strong) UIFont *font;
 @property (nonatomic) NSTextAlignment textAlignment;
