@@ -20,6 +20,8 @@
 
 - (void)viewDidLoad
 {
+    // http://losingfight.com/blog/2007/08/28/how-to-implement-a-magic-wand-tool/
+    // https://bitbucket.org/andyfinnell/magicwand/src/3b00c6fb18c7e1d0dc28b9d80b09015a28118d6b/PathBuilder.m?at=default
 //    UIImage *circle = [UIImage imageNamed:@"big-drawn-circle"];
 //    UIBezierPath *path = [circle pathFromInnerAlpha:0.5];
 
