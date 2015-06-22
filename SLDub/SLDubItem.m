@@ -97,12 +97,35 @@ typedef enum {
 
     [helpView punchHole:self.portalPath forItem:self];
     [self render:NO];
+    
+    [self addAccessibilityElement];
+}
+
+- (void)addAccessibilityElement
+{
+    if (self.helpView == nil)
+    {
+        return;
+    }
+    
+    [self.helpView setAccessibilityElements:nil];
+    
+    UIAccessibilityElement *element = [[UIAccessibilityElement alloc] initWithAccessibilityContainer:self.helpView];
+    [element setAccessibilityLabel:[self.message string]];
+    [element setAccessibilityTraits:UIAccessibilityTraitStaticText];
+    CGRect accessibilityFrame = [self messageRect];
+    accessibilityFrame.size = [self messageSizeForWidth:self.messageRect.size.width];
+    [element setAccessibilityFrame:UIAccessibilityConvertFrameToScreenCoordinates(accessibilityFrame, self.helpView)];
+    NSArray *elements = @[element];
+    [self.helpView setAccessibilityElements:elements];
 }
 
 - (void)removeFromHelpView {
     [self removeFromSuperlayer];
     [self.helpView patchHoleForItem:self];
     self.helpView = nil;
+    
+    [self.helpView setAccessibilityElements:nil];
 }
 
 - (void)setPortalPath:(UIBezierPath *)portalPath {
@@ -122,6 +145,8 @@ typedef enum {
 
     [self calculateTextRect];
     [self calculatePointsAndDirections];
+    
+    [self addAccessibilityElement];
 }
 
 - (NSString *)message {
