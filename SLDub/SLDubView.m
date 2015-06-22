@@ -118,6 +118,11 @@
     }
 }
 
+- (BOOL)accessibilityViewIsModal
+{
+    return YES;
+}
+
 - (void)setFrame:(CGRect)frame {
     [super setFrame:frame];
     self.fillLayer.frame = self.bounds;
